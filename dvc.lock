@@ -1,0 +1,38 @@
+schema: '2.0'
+stages:
+  data_collection:
+    cmd: python data_collection.py
+    deps:
+    - path: data_collection.py
+      md5: da182a1cd3db78074def139ed1c4aa56
+      size: 1045
+    outs:
+    - path: raw_data.csv
+      md5: 0d3079f78d121ae0719ddab7dce7fe8b
+      size: 1672
+  data_preprocessing:
+    cmd: python data_preprocessing.py
+    deps:
+    - path: data_preprocessing.py
+      md5: 6ea93bd6d1e9c2e0d8c75ee9307a9230
+      size: 594
+    - path: raw_data.csv
+      md5: 0d3079f78d121ae0719ddab7dce7fe8b
+      size: 1672
+    outs:
+    - path: processed_data.csv
+      md5: 85819931d3fae6326b4439e9732c4f88
+      size: 3512
+  model_training:
+    cmd: python model_training.py
+    deps:
+    - path: model_training.py
+      md5: 17ea33773e6c8d3c33938b4bc1bf4419
+      size: 399
+    - path: processed_data.csv
+      md5: 85819931d3fae6326b4439e9732c4f88
+      size: 3512
+    outs:
+    - path: model.pkl
+      md5: 246868c8881a31ad23533de7d56f8eef
+      size: 546
